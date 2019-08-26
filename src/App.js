@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 import Nav from './components/nav.jsx';
-import Login from './components/login.jsx';
+import Login from './components/Login.jsx';
 
 function About() {
   return <h2>About</h2>;
