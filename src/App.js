@@ -6,8 +6,8 @@ import './App.css';
 import Nav from './components/nav.jsx';
 import Login from './components/Login.jsx';
 
-function Admin() {
-  return <h2>Admin</h2>;
+function Dashboard() {
+  return <h2>Dashboard</h2>;
 }
 
 function Users() {
@@ -20,7 +20,7 @@ function AppRouter() {
       <Nav />
       <div className="App">
         <Route path="/" exact component={Login} />
-        <Route path="/admin/" component={Admin} />
+        <Route path="/dashboard/" component={Dashboard} />
         <Route path="/users/" component={Users} />
       </div>
     </Router>
