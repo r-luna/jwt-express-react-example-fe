@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import TextInput from './TextInput';
+import axios from 'axios';
+
+require('dotenv').config();
 
 class Login extends Component {
   constructor(props) {
@@ -7,6 +11,8 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      valid: true,
+      redirect: false,
     };
   }
 
@@ -17,10 +23,37 @@ class Login extends Component {
   returnIsDisabled = () => {
     const usernameLen = this.state.username.length;
     const passwordLen = this.state.password.length;
-    return (usernameLen < 6 || passwordLen == 0);
+    return (usernameLen < 6 || passwordLen === 0);
+  };
+
+  handleSubmit = (e) => {
+    const that = this;
+    e.preventDefault();
+    const { username, password } = this.state;
+    axios.post(`${process.env.REACT_APP_PROXY}/api/user/login`, {
+      email: username,
+      password,
+    },{
+      withCredentials: true,
+    })
+    .then(function (response) {
+      that.setState({ valid:true });
+      if (response.status === 200){
+        that.setState({ redirect: true });
+      } else {
+        that.setState({ valid:false });
+      }
+    })
+    .catch(function (error) {
+      that.setState({ valid:false });
+    });
   };
 
   render() {
+    const { username, password, valid, redirect } = this.state;
+    if (redirect){
+      return <Redirect to='/dashboard' />
+    }
     return (
       <div className="jumbotron login">
         <div id="formContent">
@@ -30,9 +63,10 @@ class Login extends Component {
               type="email"
               id="username"
               name="username"
-              placeholder="login"
-              value={this.state.username}
-              labelText="User Name"
+              placeholder=""
+              value={username}
+              labelText="Email"
+              className={ !valid ? 'form-control is-invalid': ''}
               onChange={this.handleFieldChange}
             ></TextInput>
             <TextInput
@@ -40,13 +74,15 @@ class Login extends Component {
               id="password"
               name="password"
               placeholder=""
-              value={this.state.password}
+              value={password}
               labelText="Password"
+              className={ !valid ? 'form-control is-invalid': ''}
               onChange={this.handleFieldChange}
             ></TextInput>
             <TextInput
-              type="submit"
-              onChange={this.handleFieldChange}
+              type="button"
+              value="Submit"
+              onClick={this.handleSubmit}
               disabled={this.returnIsDisabled()}
             ></TextInput>
           </form>
