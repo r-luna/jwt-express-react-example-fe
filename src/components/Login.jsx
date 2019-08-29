@@ -87,7 +87,7 @@ class Login extends Component {
             ></TextInput>
           </form>
           <div id="formFooter">
-            <a className="underlineHover small" href="/create">Create Account</a>
+            <a className="underlineHover small" href="/account/create/">Create Account</a>
           </div>
         </div>
       </div>
