@@ -5,13 +5,14 @@ import './App.css';
 
 import Nav from './components/nav.jsx';
 import Login from './components/Login.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
-function Dashboard() {
-  return <h2>Dashboard</h2>;
+function CreateAccount() {
+  return <h2>Users</h2>;
 }
 
-function CreateUser() {
-  return <h2>Users</h2>;
+function EmployerAccount() {
+  return <h2>Employer Account</h2>
 }
 
 function AppRouter() {
@@ -21,7 +22,8 @@ function AppRouter() {
       <div className="App">
         <Route path="/" exact component={Login} />
         <Route path="/dashboard/" component={Dashboard} />
-        <Route path="/user/create/" component={CreateUser} />
+        <Route path="/account/employer/" component={EmployerAccount} />
+        <Route path="/account/create/" component={CreateAccount} />
         <Route path="/*" render={() => <Redirect to="/" />} />
       </div>
     </Router>
