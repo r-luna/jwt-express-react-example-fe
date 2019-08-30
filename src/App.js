@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 import Nav from './components/nav.jsx';
 import Login from './components/Login.jsx';
 import Dashboard from './components/Dashboard.jsx';
-import AccountCreate from './components/AccountCreate.jsx'
+import AccountCreate from './components/AccountCreate.jsx';
 
 function AccountEmployer() {
   return <h2>Employer Account</h2>
