@@ -29,7 +29,7 @@ class AccountCreate extends Component {
       lNameMinLength: 2,
       emailIsValid: undefined,
       emailIsInValid: false,
-      emailMaxLength: 65,
+      emailMaxLength: 125,
       emailMinLength: 6,
       passwordIsValid: undefined,
       passwordIsInValid: false,
@@ -89,12 +89,12 @@ class AccountCreate extends Component {
   };
 
   handleSubmit = (e) => {
+    e.preventDefault();
     this.validateForm();
-    if (this.state.formIsValid) {
+    if (!this.state.formIsValid) {
       return;
     }
     const that = this;
-    e.preventDefault();
     const { fname, lname, email, password } = this.state;
     axios.post(`${process.env.REACT_APP_PROXY}/api/user/create`, {
       fname,
