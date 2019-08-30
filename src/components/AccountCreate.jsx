@@ -39,6 +39,7 @@ class AccountCreate extends Component {
       passwordVerifyIsInValid: false,
       passwordsMatch: undefined,
       formIsValid: false,
+      createError: undefined,
     };
   }
 
@@ -88,32 +89,33 @@ class AccountCreate extends Component {
 
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    this.validateForm();
+    await this.validateForm();
     if (!this.state.formIsValid) {
       return;
     }
+    console.log('hello');
     const that = this;
-    const { fname, lname, email, password } = this.state;
+    const { fName: fname, lName: lname, email, password } = this.state;
     axios.post(`${process.env.REACT_APP_PROXY}/api/user/create`, {
       fname,
       lname,
       email,
       password,
-    },{
-      withCredentials: true,
     })
     .then(function (response) {
+      console.log(response);
       that.setState({ valid:true });
       if (response.status === 200){
-        that.setState({ redirect: true });
+        that.setState({ createSuccess: true });
       } else {
-        that.setState({ valid:false });
+        that.setState({ createSuccess:false });
       }
     })
     .catch(function (error) {
-      that.setState({ valid:false });
+      console.log(error)
+      that.setState({ createError: JSON.stringify(error) });
     });
   };
 
