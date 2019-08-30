@@ -7,16 +7,15 @@ import Form from 'react-bootstrap/Form';
 class FormInput extends Component {
   render() {
     // eslint-disable-next-line object-curly-newline
-    const { as, disabled, id, isInvalid, isValid, onChange, onClick, size, type, value, labelText, labelColumn, groupControlId, style, buttonVariant } = this.props;
+    const { as, disabled, id, isInvalid, isValid, onChange, onClick, required, size, type, value, labelText, groupControlId, style, buttonVariant, } = this.props;
+    const {placeholder, maxLength, minLength, } = this.props;
     return (
       <div>
         { type !== 'button' && (
           <Form.Group
             controlId={groupControlId}
           >
-            <Form.Label
-              column={labelColumn}
-            >{labelText}</Form.Label>
+            <Form.Label>{labelText}</Form.Label>
             <Form.Control
               as={as}
               disabled={disabled}
@@ -29,6 +28,10 @@ class FormInput extends Component {
               type={type}
               value={value}
               style={style}
+              placeholder={placeholder}
+              maxLength={maxLength}
+              minLength={minLength}
+              {...(required ? {required: true} : {})}
             ></Form.Control>
           </Form.Group>
         )}

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 
-import Nav from './components/nav.jsx';
+import Nav from './components/Nav.jsx';
 import Login from './components/Login.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import AccountCreate from './components/AccountCreate.jsx';

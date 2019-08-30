@@ -16,8 +16,8 @@ class Login extends Component {
       password: '',
       valid: true,
       redirect: false,
-      inputStyles: {
-        width: '250px',
+      labelStyles: {
+        textAlign: 'right'
       }
     };
   }
@@ -64,21 +64,26 @@ class Login extends Component {
     return (
       <div className="jumbotron login">
         <div id="formContent">
-          <h5>Login</h5>
-          <form>
+          <Container>
+            <Row>
+              <Col>
+                <h5 className="text-left">Login</h5>
+              </Col>
+            </Row>
+          </Container>
+          <form noValidate id="login-form">
             <FormInput
               as="input"
               disabled=""
               isInvalid=""
               isValid=""
               onChange={this.handleFieldChange}
-              size="lg"
+              size="sm"
               type="email"
               value={username}
               labelText="Email"
               labelColumn="false"
               groupControlId="username"
-              style={inputStyles}
             ></FormInput>
             <FormInput
               as="input"
@@ -86,17 +91,16 @@ class Login extends Component {
               isInvalid=""
               isValid=""
               onChange={this.handleFieldChange}
-              size="lg"
+              size="sm"
               type="password"
               value={password}
               labelText="Password"
               labelColumn="false"
               groupControlId="password"
-              style={inputStyles}
             ></FormInput>
             <Container>
               <Row>
-                <Col>
+                <Col sm={4}>
                   <FormInput
                     type="button"
                     labelText="Submit"
@@ -105,7 +109,7 @@ class Login extends Component {
                     disabled={this.returnIsDisabled()}
                   ></FormInput>
                 </Col>
-                <Col className="my-auto">
+                <Col sm={8} className="my-auto">
                   <Link to="/account/create/" className="small">Create Account</Link>
                 </Col>
               </Row>
