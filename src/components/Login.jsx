@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import FormInput from './FormInput';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 require('dotenv').config();
 
@@ -13,6 +16,9 @@ class Login extends Component {
       password: '',
       valid: true,
       redirect: false,
+      inputStyles: {
+        width: '250px',
+      }
     };
   }
 
@@ -51,7 +57,7 @@ class Login extends Component {
   };
 
   render() {
-    const { username, password, valid, redirect } = this.state;
+    const { username, password, valid, redirect, inputStyles } = this.state;
     if (redirect){
       return <Redirect to='/dashboard' />
     }
@@ -72,6 +78,7 @@ class Login extends Component {
               labelText="Email"
               labelColumn="false"
               groupControlId="username"
+              style={inputStyles}
             ></FormInput>
             <FormInput
               as="input"
@@ -85,17 +92,25 @@ class Login extends Component {
               labelText="Password"
               labelColumn="false"
               groupControlId="password"
+              style={inputStyles}
             ></FormInput>
-            <FormInput
-              type="button"
-              labelText="Submit"
-              onClick={this.handleSubmit}
-              disabled={this.returnIsDisabled()}
-            ></FormInput>
+            <Container>
+              <Row>
+                <Col>
+                  <FormInput
+                    type="button"
+                    labelText="Submit"
+                    buttonVariant="primary"
+                    onClick={this.handleSubmit}
+                    disabled={this.returnIsDisabled()}
+                  ></FormInput>
+                </Col>
+                <Col className="my-auto">
+                  <Link to="/account/create/" className="small">Create Account</Link>
+                </Col>
+              </Row>
+            </Container>
           </form>
-          <div id="formFooter">
-            <Link className="underlineHover small" to="/account/create/">Create Account</Link>
-          </div>
         </div>
       </div>
     );

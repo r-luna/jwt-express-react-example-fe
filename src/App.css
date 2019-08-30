@@ -41,10 +41,16 @@
 }
 
 .jumbotron.login #formContent {
-  width: 173px;
+  width: 250px;
   margin: 0 auto;
   text-align: left;
 }
 .dropdown-menu.show{
   left: -118px;
+}
+
+/* overrides */
+
+.form-label.col {
+  padding-left: 0px;
 }
