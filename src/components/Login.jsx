@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import TextInput from './TextInput';
+import { Redirect, Link } from 'react-router-dom';
+import FormInput from './FormInput';
 import axios from 'axios';
 
 require('dotenv').config();
@@ -17,7 +17,8 @@ class Login extends Component {
   }
 
   handleFieldChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
+    console.log(e.target.id);
+    this.setState({[e.target.id]: e.target.value});
   }
 
   returnIsDisabled = () => {
@@ -59,35 +60,41 @@ class Login extends Component {
         <div id="formContent">
           <h5>Login</h5>
           <form>
-            <TextInput
+            <FormInput
+              as="input"
+              disabled=""
+              isInvalid=""
+              isValid=""
+              onChange={this.handleFieldChange}
+              size="lg"
               type="email"
-              id="username"
-              name="username"
-              placeholder=""
               value={username}
               labelText="Email"
-              className={ !valid ? 'form-control is-invalid': ''}
+              labelColumn="false"
+              groupControlId="username"
+            ></FormInput>
+            <FormInput
+              as="input"
+              disabled=""
+              isInvalid=""
+              isValid=""
               onChange={this.handleFieldChange}
-            ></TextInput>
-            <TextInput
+              size="lg"
               type="password"
-              id="password"
-              name="password"
-              placeholder=""
               value={password}
               labelText="Password"
-              className={ !valid ? 'form-control is-invalid': ''}
-              onChange={this.handleFieldChange}
-            ></TextInput>
-            <TextInput
+              labelColumn="false"
+              groupControlId="password"
+            ></FormInput>
+            <FormInput
               type="button"
-              value="Submit"
+              labelText="Submit"
               onClick={this.handleSubmit}
               disabled={this.returnIsDisabled()}
-            ></TextInput>
+            ></FormInput>
           </form>
           <div id="formFooter">
-            <a className="underlineHover small" href="/account/create/">Create Account</a>
+            <Link className="underlineHover small" to="/account/create/">Create Account</Link>
           </div>
         </div>
       </div>

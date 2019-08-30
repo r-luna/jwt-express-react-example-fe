@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import TextInput from './TextInput';
 import axios from 'axios';
 
 require('dotenv').config();
