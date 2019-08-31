@@ -25,7 +25,7 @@ class navComponent extends Component {
               }
               id="basic-nav-dropdown"
               className="ml-auto"
-              onSelect={function(){}}
+              onSelect={function(){}} // triggers collapse when an item is clicked
               // eslint-disable-next-line react/jsx-closing-bracket-location
               >
               <NavDropdown.Item to="/login">Login</NavDropdown.Item>

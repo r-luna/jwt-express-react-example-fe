@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import TextInput from './TextInput';
+import { Redirect, Link } from 'react-router-dom';
+import FormInput from './FormInput';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 require('dotenv').config();
 
@@ -13,11 +16,15 @@ class Login extends Component {
       password: '',
       valid: true,
       redirect: false,
+      labelStyles: {
+        textAlign: 'right'
+      }
     };
   }
 
   handleFieldChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
+    console.log(e.target.id);
+    this.setState({[e.target.id]: e.target.value});
   }
 
   returnIsDisabled = () => {
@@ -50,45 +57,64 @@ class Login extends Component {
   };
 
   render() {
-    const { username, password, valid, redirect } = this.state;
+    const { username, password, valid, redirect, inputStyles } = this.state;
     if (redirect){
       return <Redirect to='/dashboard' />
     }
     return (
       <div className="jumbotron login">
         <div id="formContent">
-          <h5>Login</h5>
-          <form>
-            <TextInput
+          <Container>
+            <Row>
+              <Col>
+                <h5 className="text-left">Login</h5>
+              </Col>
+            </Row>
+          </Container>
+          <form noValidate id="login-form">
+            <FormInput
+              as="input"
+              disabled=""
+              isInvalid=""
+              isValid=""
+              onChange={this.handleFieldChange}
+              size="sm"
               type="email"
-              id="username"
-              name="username"
-              placeholder=""
               value={username}
               labelText="Email"
-              className={ !valid ? 'form-control is-invalid': ''}
+              labelColumn="false"
+              groupControlId="username"
+            ></FormInput>
+            <FormInput
+              as="input"
+              disabled=""
+              isInvalid=""
+              isValid=""
               onChange={this.handleFieldChange}
-            ></TextInput>
-            <TextInput
+              size="sm"
               type="password"
-              id="password"
-              name="password"
-              placeholder=""
               value={password}
               labelText="Password"
-              className={ !valid ? 'form-control is-invalid': ''}
-              onChange={this.handleFieldChange}
-            ></TextInput>
-            <TextInput
-              type="button"
-              value="Submit"
-              onClick={this.handleSubmit}
-              disabled={this.returnIsDisabled()}
-            ></TextInput>
+              labelColumn="false"
+              groupControlId="password"
+            ></FormInput>
+            <Container>
+              <Row>
+                <Col sm={4}>
+                  <FormInput
+                    type="button"
+                    labelText="Submit"
+                    buttonVariant="primary"
+                    onClick={this.handleSubmit}
+                    disabled={this.returnIsDisabled()}
+                  ></FormInput>
+                </Col>
+                <Col sm={8} className="my-auto">
+                  <Link to="/account/create/" className="small">Create Account</Link>
+                </Col>
+              </Row>
+            </Container>
           </form>
-          <div id="formFooter">
-            <a className="underlineHover small" href="/create">Create Account</a>
-          </div>
         </div>
       </div>
     );
